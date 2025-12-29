@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import DatePicker from "react-datepicker";
 import SubmitButton from "./SubmitButton";
+import { useLocation } from "react-router-dom";
 
 const Form = ({ type, title, btnProperties, formik, task }) => {
-  // useState for DatePicker
-  const [startDate, setStartDate] = useState(null);
+  // console.log(useLocation());
 
-  // Handle DatePicker change - update both useState and Formik
+  const { pathname } = useLocation();
+
+  console.log(pathname.split("/")[2] === "add");
+
+  // Handle DatePicker change - write directly into Formik
   const handleDateChange = (date) => {
-    setStartDate(date);
+    console.log("I am insiode the ha ndlemc hnage");
+
+    console.log(date);
     formik?.setFieldValue("dueDate", date);
   };
 
-  // handle on Blur
+  // Handle DatePicker blur - mark field as touched in Formik
   const handleBlur = () => {
     formik?.setFieldTouched("dueDate", true);
   };
 
-  // Populate form when task prop is provided (for edit mode)
-  useEffect(() => {
-    if (task && Object?.keys(task)?.length > 0 && formik) {
-      // Set all form values at once
-      const formValues = { ...formik.values };
-      for (let k in formValues) {
-        if (task[k] !== undefined) {
-          formValues[k] = task[k];
-        }
-      }
-      formik.setValues(formValues);
+  console.log(task);
 
-      // Set the date picker value if dueDate exists in task
-      if (task.dueDate) {
-        const dateValue =
-          task.dueDate instanceof Date ? task.dueDate : new Date(task.dueDate);
-        setStartDate(dateValue);
-        formik.setFieldValue("dueDate", dateValue);
+  useEffect(() => {
+    if (pathname.split("/")[2] === "add") {
+      return;
+    }
+
+    if (Object?.keys(task)?.length > 0) {
+      for (let k in formik?.values) {
+        console.log(formik?.values);
+        formik.setFieldValue(k, task[k]);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // console.log(staff);
   }, [task]);
 
   return (
@@ -115,10 +114,11 @@ const Form = ({ type, title, btnProperties, formik, task }) => {
         </div>
 
         <DatePicker
-          selected={startDate}
+          selected={formik.values.dueDate}
           onChange={handleDateChange}
           onBlur={handleBlur}
-          id="task-due-date"
+          showTimeSelect
+          dateFormat="yyyy/MM/dd"
           className="outline-none border-1 px-2 h-8 w-full"
         />
         {formik?.touched?.dueDate && formik?.errors?.dueDate && (
@@ -167,7 +167,11 @@ const Form = ({ type, title, btnProperties, formik, task }) => {
         )}
       </div>
 
-      <SubmitButton btnProperties={btnProperties} formik={formik} />
+      <SubmitButton
+        btnProperties={btnProperties}
+        formik={formik}
+        type="submit"
+      />
     </form>
   );
 };

@@ -21,6 +21,8 @@ const taskValidationSchema = Yup.object({
 });
 
 const Create = () => {
+  console.log("I am inside the create");
+
   const navigate = useNavigate();
   // Formik setup
   const formik = useFormik({
@@ -32,6 +34,8 @@ const Create = () => {
     validationSchema: taskValidationSchema,
     onSubmit: (values, { setSubmitting }) => {
       console.log("Form submitted with values:", values);
+
+      console.log(values);
 
       async function createTask() {
         try {

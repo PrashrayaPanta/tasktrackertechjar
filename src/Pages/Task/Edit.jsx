@@ -81,6 +81,7 @@ const Edit = () => {
 
   return (
     <Form
+      type="HorizontalFormCenter"
       title="Edit Task"
       btnProperties={btnProperties}
       formik={formik}

@@ -9,7 +9,7 @@ const NavigationButton = ({ label, icon, navigatedto }) => {
   return label === "Add" ? (
     <Link
       className="px-4 py-2 bg-black text-white flex gap-2 items-center"
-      to={`http://localhost:5173${pathname}/${label?.toLowerCase()}`}
+      to={`http://localhost:5174${pathname}/${label?.toLowerCase()}`}
     >
       <i className={`fa-solid ${icon}`}></i>
       {label}
@@ -17,7 +17,7 @@ const NavigationButton = ({ label, icon, navigatedto }) => {
   ) : (
     <Link
       className="px-4 py-2 bg-black text-white flex gap-2 items-center"
-      to={`http://localhost:5173${pathname}/${label?.toLowerCase()}/${navigatedto}`}
+      to={`http://localhost:5174${pathname}/${label?.toLowerCase()}/${navigatedto}`}
     >
       <i className={`fa-solid ${icon}`}></i>
       {label}

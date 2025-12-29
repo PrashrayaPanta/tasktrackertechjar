@@ -42,7 +42,6 @@ const Header = () => {
         </div>
 
         {/* Search Task */}
-
         <input type="text" className="w-60 outline-0 bg-white px-2 py-1" />
 
         <div className="flex gap-10">
@@ -83,10 +82,10 @@ const Header = () => {
             {openUserSetting && (
               <div className="absolute top-8 right-0 -left-12 rounded-sm px-2 py-2 bg-blue-500">
                 {/* Edit Profile */}
-                <a
-                  href="/profile/edit"
+                <Link
+                  to={`/task?status=Pending`}
                   className="flex items-center pb-2 gap-2"
-                  onClick={handleSortBySetting}
+                  onClick={() => SetOpenUserSetting(false)}
                 >
                   {/* Pending Task Icon */}
                   <svg
@@ -104,13 +103,14 @@ const Header = () => {
                     <path d="M12 6v6l4 2" />
                   </svg>
                   Pending
-                </a>
+                </Link>
 
                 {/* Change Password */}
 
-                <a
-                  href="/profile/change-password"
+                <Link
+                  to="/task?status=Completed"
                   className="flex items-center pb-2 gap-2"
+                  onClick={() => SetOpenUserSetting(false)}
                 >
                   {/* Task Completed Icon */}
                   <svg
@@ -129,12 +129,9 @@ const Header = () => {
                     <path d="M9 12l2 2 4-4" />
                   </svg>
                   Completed
-                </a>
+                </Link>
 
-                <a
-                  href="/profile/change-password"
-                  className="flex items-center pb-2 gap-2"
-                >
+                <Link to="/task" className="flex items-center pb-2 gap-2">
                   {/* Task Completed Icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +149,7 @@ const Header = () => {
                     <path d="M9 12l2 2 4-4" />
                   </svg>
                   All
-                </a>
+                </Link>
 
                 {/* Horizontal Line border */}
                 <hr className="border border-gray-400 mb-2" />
@@ -162,8 +159,8 @@ const Header = () => {
 
           {/* Sort Part */}
           <div className="text-white relative hidden lg:block">
-            <a
-              href="#"
+            <Link
+              to="#"
               className="flex items-center"
               onClick={handleSortBySetting}
             >
@@ -195,12 +192,12 @@ const Header = () => {
               >
                 <path d="M297.4 470.6C309.9 483.1 330.2 483.1 342.7 470.6L534.7 278.6C547.2 266.1 547.2 245.8 534.7 233.3C522.2 220.8 501.9 220.8 489.4 233.3L320 402.7L150.6 233.4C138.1 220.9 117.8 220.9 105.3 233.4C92.8 245.9 92.8 266.2 105.3 278.7L297.3 470.7z" />
               </svg>
-            </a>
+            </Link>
 
             {openSortBy && (
               <div className="absolute top-8 right-0 -left-12 rounded-sm px-2 py-2 bg-blue-500">
                 {/* Edit Profile */}
-                <a href="#" className="flex items-center pb-2 gap-2">
+                <Link to="/" className="flex items-center pb-2 gap-2">
                   {/* Pending Task Icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -217,12 +214,12 @@ const Header = () => {
                     <path d="M12 6v6l4 2" />
                   </svg>
                   Name
-                </a>
+                </Link>
 
                 {/* Change Password */}
 
-                <a
-                  href="/profile/change-password"
+                <Link
+                  to="/task?_sort=dueDate&_order=asc"
                   className="flex items-center pb-2 gap-2"
                 >
                   {/* Task Completed Icon */}
@@ -241,8 +238,8 @@ const Header = () => {
                     <circle cx="12" cy="12" r="10" />
                     <path d="M9 12l2 2 4-4" />
                   </svg>
-                  Date Created
-                </a>
+                  Due Date
+                </Link>
 
                 {/* Horizontal Line border */}
                 <hr className="border border-gray-400 mb-2" />
